@@ -19,3 +19,9 @@ variable "lab-1-vpc-name" {
   type        = string
   default     = "lab-1-vpc"
 }
+
+variable "region" {
+  description = "Region to create AWS resources"
+  type        = string
+  default     = "eu-west-2"
+}
