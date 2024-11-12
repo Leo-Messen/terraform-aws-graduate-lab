@@ -1,5 +1,3 @@
-default_tags = {
-  Environment = "dev"
-  ProjectName = "grad-lab-1"
-  CreatedBy   = "Terraform"
-}
+
+project_name = "grad-lab-1"
+environment  = "dev"

@@ -10,6 +10,10 @@ terraform {
 
 provider "aws" {
   default_tags {
-    tags = var.default_tags
+    tags = {
+      Environment = var.environment
+      ProjectName = var.project_name
+      CreatedBy   = "Terraform"
+    }
   }
 }
