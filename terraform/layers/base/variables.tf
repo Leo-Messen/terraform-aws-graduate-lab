@@ -14,12 +14,6 @@ variable "lab-1-vpc-cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "lab-1-vpc-name" {
-  description = "Lab 1 VPC name"
-  type        = string
-  default     = "lab-1-vpc"
-}
-
 variable "region" {
   description = "Region to create AWS resources"
   type        = string

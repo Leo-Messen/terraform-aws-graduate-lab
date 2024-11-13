@@ -3,13 +3,14 @@ data "aws_availability_zones" "available_azs" {
 }
 
 locals {
-  az_names = slice(data.aws_availability_zones.available_azs.names, 0, 3)
+  az_names             = slice(data.aws_availability_zones.available_azs.names, 0, 3)
+  resource_name_prefix = "${var.project_name}-${var.environment}"
 }
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = var.lab-1-vpc-name
+  name = "${local.resource_name_prefix}-vpc"
   cidr = var.lab-1-vpc-cidr
 
   azs             = local.az_names                                                          // all available
