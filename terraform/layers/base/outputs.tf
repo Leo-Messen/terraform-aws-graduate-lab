@@ -3,9 +3,9 @@ output "available_azs" {
 }
 
 output "s3_webfiles_bucket_arn" {
-  value = module.s3_bucket.s3_bucket_arn
+  value = module.s3_webfiles_bucket.s3_bucket_arn
 }
 
 output "s3_webfiles_bucket_id" {
-  value = module.s3_bucket.s3_bucket_id
+  value = module.s3_webfiles_bucket.s3_bucket_id
 }
