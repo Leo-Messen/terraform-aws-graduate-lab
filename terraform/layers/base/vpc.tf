@@ -21,3 +21,22 @@ module "vpc" {
   single_nat_gateway     = var.environment == "dev" ? true : false // true when in dev environment
   one_nat_gateway_per_az = false                                   // 1 subnet in each AZ so no need to specify this
 }
+
+module "endpoints" {
+  source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+
+  vpc_id = module.vpc.vpc_id
+
+  endpoints = {
+    s3 = {
+      service         = "s3"
+      service_type    = "Gateway"
+      route_table_ids = module.vpc.private_route_table_ids
+
+      tags = {
+        Name = "${var.project_name}-${var.environment}-s3-gateway-endpoint"
+      }
+    }
+  }
+
+}
