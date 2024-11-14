@@ -25,7 +25,7 @@ module "grad_lab_1_vpc" {
 module "s3_gateway_endpoint" {
   source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
 
-  vpc_id = module.grad-lab-1-vpc.vpc_id
+  vpc_id = module.grad_lab_1_vpc.vpc_id
 
   endpoints = {
     s3 = {
