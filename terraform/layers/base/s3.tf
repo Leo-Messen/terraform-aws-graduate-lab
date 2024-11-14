@@ -1,4 +1,4 @@
-module "s3_bucket" {
+module "s3_webfiles_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
   bucket = "${local.resource_name_prefix}-webfiles"
