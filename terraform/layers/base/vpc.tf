@@ -7,7 +7,7 @@ locals {
   resource_name_prefix = "${var.project_name}-${var.environment}"
 }
 
-module "vpc" {
+module "grad-lab-1-vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "${local.resource_name_prefix}-vpc"
