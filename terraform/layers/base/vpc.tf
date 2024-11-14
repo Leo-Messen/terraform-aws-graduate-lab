@@ -21,3 +21,22 @@ module "grad-lab-1-vpc" {
   single_nat_gateway     = var.environment == "dev" ? true : false // true when in dev environment
   one_nat_gateway_per_az = false                                   // 1 subnet in each AZ so no need to specify this
 }
+
+module "s3_gateway_endpoint" {
+  source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+
+  vpc_id = module.grad-lab-1-vpc.vpc_id
+
+  endpoints = {
+    s3 = {
+      service         = "s3"
+      service_type    = "Gateway"
+      route_table_ids = module.grad-lab-1-vpc.private_route_table_ids
+
+      tags = {
+        Name = "${local.resource_name_prefix}-s3-gateway-endpoint"
+      }
+    }
+  }
+
+}
