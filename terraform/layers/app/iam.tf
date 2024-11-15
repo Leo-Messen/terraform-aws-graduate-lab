@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ec2_get_webfiles_role" {
-  name = "ec2-get-webfiles-role"
+  name = "${local.resource_name_prefix}-ec2-get-webfiles-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -15,7 +15,7 @@ resource "aws_iam_role" "ec2_get_webfiles_role" {
 }
 
 resource "aws_iam_role_policy" "ec2_get_webfiles_policy" {
-  name = "ec2-get-webfiles-policy"
+  name = "${local.resource_name_prefix}-ec2-get-webfiles-policy"
   role = aws_iam_role.ec2_get_webfiles_role.id
 
   policy = jsonencode({
@@ -23,10 +23,12 @@ resource "aws_iam_role_policy" "ec2_get_webfiles_policy" {
     Statement = [
       {
         Action = [
-          "s3:GetObject"
+          "s3:GetObject",
+          "s3:ListObject"
         ]
         Effect = "Allow"
         Resource = [
+          "${data.aws_s3_bucket.s3_webfiles_bucket.arn}",
           "${data.aws_s3_bucket.s3_webfiles_bucket.arn}/*"
         ]
       }
@@ -35,6 +37,6 @@ resource "aws_iam_role_policy" "ec2_get_webfiles_policy" {
 }
 
 resource "aws_iam_instance_profile" "ec2_s3_profile" {
-  name = "ec2_get_webfiles_profile"
+  name = "${local.resource_name_prefix}-ec2_get_webfiles_profile"
   role = aws_iam_role.ec2_get_webfiles_role.id
 }
