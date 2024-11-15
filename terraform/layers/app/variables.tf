@@ -19,3 +19,9 @@ variable "index_html_path" {
   type        = string
   default     = "src/index.html"
 }
+
+variable "web_user_data_path" {
+  description = "Path to ec2 user data file"
+  type        = string
+  default     = "src/ec2WebUserData.tftpl"
+}
