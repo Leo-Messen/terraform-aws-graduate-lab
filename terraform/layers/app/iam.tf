@@ -36,7 +36,7 @@ resource "aws_iam_role_policy" "ec2_get_webfiles_policy" {
   })
 }
 
-resource "aws_iam_instance_profile" "ec2_s3_profile" {
-  name = "${local.resource_name_prefix}-ec2_get_webfiles_profile"
+resource "aws_iam_instance_profile" "ec2_get_webfiles_profile" {
+  name = "${local.resource_name_prefix}-ec2-get-webfiles-profile"
   role = aws_iam_role.ec2_get_webfiles_role.id
 }
