@@ -8,7 +8,7 @@ variable "project_name" {
   type        = string
 }
 
-variable "lab-1-vpc-cidr" {
+variable "lab_1_vpc_cidr" {
   description = "Lab 1 VPC CIDR range"
   type        = string
   default     = "10.0.0.0/16"
