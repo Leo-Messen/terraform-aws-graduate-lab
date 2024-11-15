@@ -13,3 +13,9 @@ variable "region" {
   type        = string
   default     = "eu-west-2"
 }
+
+variable "index_html_path" {
+  description = "Path to index.html webfile"
+  type        = string
+  default     = "src/index.html"
+}
