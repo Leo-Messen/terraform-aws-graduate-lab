@@ -7,7 +7,7 @@ data "aws_s3_bucket" "s3_webfiles_bucket" {
 }
 
 resource "aws_s3_object" "index_html_file" {
-  bucket = "${local.resource_name_prefix}-webfiles"
+  bucket = data.aws_s3_bucket.s3_webfiles_bucket.id
   key    = "index.html"
   source = var.index_html_path
   etag   = filemd5(var.index_html_path)
