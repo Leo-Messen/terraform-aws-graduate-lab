@@ -19,7 +19,8 @@ data "aws_subnets" "grad_lab_1_vpc_public_subnets" {
 }
 
 module "grad_lab_1_alb" {
-  source = "terraform-aws-modules/alb/aws"
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 9.12.0"
 
   name    = "${local.resource_name_prefix}-alb"                // use resource prefix -alb
   vpc_id  = data.aws_vpc.grad_lab_1_vpc.id                     // get vpc id
