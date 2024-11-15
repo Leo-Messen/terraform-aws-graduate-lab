@@ -19,3 +19,15 @@ variable "index_html_path" {
   type        = string
   default     = "src/index.html"
 }
+
+variable "web_user_data_path" {
+  description = "Path to ec2 user data file"
+  type        = string
+  default     = "src/ec2WebUserData.tftpl"
+}
+
+variable "ec2_web_instance_type" {
+  description = "Instance type for ec2 web servers"
+  type        = string
+  default     = "t2.micro"
+}

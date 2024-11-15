@@ -48,7 +48,7 @@ module "grad_lab_1_alb" {
   security_group_egress_rules = { // egress on all ports
     all = {
       ip_protocol = "-1"
-      cidr_ipv4   = "10.0.0.0/16"
+      cidr_ipv4   = "0.0.0.0/0"
     }
   }
 
@@ -64,22 +64,18 @@ module "grad_lab_1_alb" {
 
   target_groups = {
     grad-lab-1-asg = {
-      protocol                          = "HTTP"
-      port                              = 80
-      target_type                       = "instance"
-      deregistration_delay              = 10
-      load_balancing_cross_zone_enabled = true
+      protocol    = "HTTP"
+      port        = 80
+      target_type = "instance"
 
       health_check = {
         enabled             = true
-        healthy_threshold   = 5
-        interval            = 30
         matcher             = "200"
         path                = "/"
         port                = 80
         protocol            = "HTTP"
-        timeout             = 5
-        unhealthy_threshold = 2
+        interval            = 120
+        unhealthy_threshold = 5
       }
       create_attachment = false
     }
