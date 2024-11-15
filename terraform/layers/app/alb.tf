@@ -25,6 +25,8 @@ module "grad_lab_1_alb" {
   vpc_id  = data.aws_vpc.grad_lab_1_vpc.id                     // get vpc id
   subnets = data.aws_subnets.grad_lab_1_vpc_public_subnets.ids // get all PUBLIC subnets from VPC
 
+  enable_deletion_protection = false
+
   # Security Group
   security_group_ingress_rules = { // open on all HTTP and HTTPS ports
     all_http = {
