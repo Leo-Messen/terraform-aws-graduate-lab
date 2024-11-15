@@ -25,3 +25,9 @@ variable "web_user_data_path" {
   type        = string
   default     = "src/ec2WebUserData.tftpl"
 }
+
+variable "ec2_web_instance_type" {
+  description = "Instance type for ec2 web servers"
+  type        = string
+  default     = "t2.micro"
+}
