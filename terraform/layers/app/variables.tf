@@ -31,3 +31,20 @@ variable "ec2_web_instance_type" {
   type        = string
   default     = "t2.micro"
 }
+
+variable "asg_min_size" {
+  description = "Minimum ASG size"
+  type        = number
+  default     = 2
+}
+
+variable "asg_max_size" {
+  description = "Maximum ASG size"
+  type        = number
+  default     = 3
+}
+variable "asg_desired_size" {
+  description = "Desired ASG size"
+  type        = number
+  default     = 2
+}
