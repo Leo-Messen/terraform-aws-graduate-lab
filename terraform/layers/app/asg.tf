@@ -77,10 +77,10 @@ resource "aws_launch_template" "ec2_web_launch_template" {
 
 resource "aws_autoscaling_group" "ec2_web_asg" {
   name                = "${local.resource_name_prefix}-ec2-web-asg"
-  max_size            = 3
-  min_size            = 2
+  max_size            = var.asg_max_size
+  min_size            = var.asg_min_size
   health_check_type   = "ELB"
-  desired_capacity    = 2
+  desired_capacity    = var.asg_desired_size
   vpc_zone_identifier = data.aws_subnets.grad_lab_1_vpc_private_subnets.ids // across all private subnets
 
   target_group_arns = [for k in module.grad_lab_1_alb.target_groups : k.arn]
