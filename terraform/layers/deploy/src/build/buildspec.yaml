@@ -1,0 +1,35 @@
+version: 0.2
+
+env:
+  parameter-store:
+    TF_VAR_github_token: "GithubToken"
+
+  variables:
+    ENVIRONMENT: ${environment}
+    TF_IN_AUTOMATION: 1
+    TERRAFORM_VERSION: ${tf_version}
+
+phases:
+  install:
+    commands:
+      - echo "Installing terraform..."
+      - cd /usr/bin
+      - curl -O https://releases.hashicorp.com/terraform/$${TERRAFORM_VERSION}/terraform_$${TERRAFORM_VERSION}_linux_amd64.zip
+      - unzip terraform_$${TERRAFORM_VERSION}_linux_amd64.zip
+      - terraform --version
+      - echo "Completed installing terraform..."
+  pre_build:
+    commands:
+      - cd "$${CODEBUILD_SRC_DIR}/layers/${tf_deploy_layer}"
+      - terraform init -no-color --reconfigure --backend-config=../../environment/${environment}/${tf_deploy_layer}/${tf_deploy_layer}.s3.tfbackend
+  build:
+    commands:
+      - cd "$${CODEBUILD_SRC_DIR}/layers/${tf_deploy_layer}"
+      - terraform plan -no-color --var-file=../../environment/${environment}/${tf_deploy_layer}/terraform.tfvars -out=${tf_deploy_config}-${tf_deploy_layer}.tfplan
+      - terraform apply -no-color -auto-approve -compact-warnings ${tf_deploy_config}-${tf_deploy_layer}.tfplan
+artifacts:
+  files:
+    - "**/*"
+  name: plans
+  discard-paths: no
+  base-directory: "$${CODEBUILD_SRC_DIR}"
