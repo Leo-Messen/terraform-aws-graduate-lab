@@ -1,4 +1,4 @@
-resource "aws_codebuild_project" "github_ecs_deploy_base" {
+resource "aws_codebuild_project" "github_tf_deploy_base" {
   name          = "github-${var.environment}-${var.project_name}-base"
   description   = "Github terraform pipeline"
   build_timeout = "120"

@@ -33,3 +33,25 @@ variable "terraform_version" {
   type        = string
   default     = "1.9.8"
 }
+
+################################################################################
+# Github
+################################################################################
+
+variable "gh_branch" {
+  description = "Github branch"
+  type        = string
+  default     = "main"
+}
+
+variable "gh_org_name" {
+  description = "Github organisation name"
+  type        = string
+  default     = "Leo-Messen"
+}
+
+variable "tf_gh_repo_name" {
+  description = "Github Terraform repository name"
+  type        = string
+  default     = "terraform-aws-graduate-lab"
+}
