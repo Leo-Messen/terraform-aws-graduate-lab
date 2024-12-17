@@ -27,6 +27,32 @@ data "aws_iam_policy_document" "codebuild_tf_deploy" {
       aws_codebuild_project.github_tf_deploy_base.arn
     ]
   }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:PutLogEventsBatch",
+    ]
+    resources = ["arn:aws:logs:*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:List*",
+      "s3:Get*",
+      "s3:Put*",
+    ]
+
+    resources = [
+      aws_s3_bucket.codepipeline_tf_deploy.arn,
+      "${aws_s3_bucket.codepipeline_tf_deploy.arn}/*",
+    ]
+  }
 }
 
 resource "aws_iam_role" "codebuild_tf_deploy" {
@@ -65,6 +91,17 @@ data "aws_iam_policy_document" "codepipeline_tf_deploy" {
     resources = [
       aws_codestarconnections_connection.github_connection.arn
     ]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+
+    resources = ["arn:aws:logs:*"]
   }
 
   statement {

@@ -23,6 +23,13 @@ resource "aws_codebuild_project" "github_tf_deploy_base" {
     privileged_mode             = true
   }
 
+  logs_config {
+    cloudwatch_logs {
+      group_name  = aws_cloudwatch_log_group.tf_deploy.name
+      stream_name = aws_cloudwatch_log_stream.codebuild_tf_deploy.name
+    }
+  }
+
   source {
     type = "CODEPIPELINE"
     buildspec = templatefile("./src/build/buildspec.yaml", {
