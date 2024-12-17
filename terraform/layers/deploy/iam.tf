@@ -24,7 +24,8 @@ data "aws_iam_policy_document" "codebuild_tf_deploy" {
     ]
 
     resources = [
-      aws_codebuild_project.github_tf_deploy_base.arn
+      aws_codebuild_project.github_tf_deploy_base.arn,
+      aws_codebuild_project.github_tf_deploy_app.arn
     ]
   }
 

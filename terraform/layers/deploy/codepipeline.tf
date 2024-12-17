@@ -45,4 +45,22 @@ resource "aws_codepipeline" "tf_codepipeline" {
       }
     }
   }
+
+  stage {
+    name = "DeployApp"
+
+    action {
+      name             = "AppLayer"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeBuild"
+      input_artifacts  = ["base_build_output"]
+      output_artifacts = ["app_build_output"]
+      version          = "1"
+
+      configuration = {
+        ProjectName = "github-${var.environment}-${var.project_name}-app"
+      }
+    }
+  }
 }
