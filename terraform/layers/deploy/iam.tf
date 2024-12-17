@@ -59,17 +59,6 @@ data "aws_iam_policy_document" "codepipeline_tf_deploy" {
     effect = "Allow"
 
     actions = [
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-    ]
-
-    resources = ["arn:aws:logs:*"]
-  }
-
-  statement {
-    effect = "Allow"
-
-    actions = [
       "s3:List*",
       "s3:Get*",
       "s3:Put*",
